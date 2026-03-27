@@ -121,6 +121,14 @@
 	Tady obrázky
 	\end{frame}
 	
+	\begin{frame}{Určování vektorů}
+	BUde
+	\end{frame}
+	
+	\begin{frame}{Posunutí}
+	Bude
+	\end{frame}
+	
 	\begin{frame}[label=C1]{Cvičení - Posun a tvorba vektorů}
 	\begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
 	\multicolumn{2}{c|}{Vytvořte a nakreslete vektory $\vec{v}=B-A$:} & \multicolumn{2}{c}{Posuňte bod $A$ o vektor $\vec{v}$:}\\ \hline
@@ -131,7 +139,73 @@
 	\end{tabular}
 	\reseni{Ř1}
 	\end{frame}
+	
+	\begin{frame}{Sčítání vektorů}
+	Vektory lze sčítat (jedná se o "sčítání posunů"): \\[2ex]
+	Vezmu-li bod $A[2,1]$ a posunu jej nejdříve o vektor $\vec{u}(1,2)$ a poté jej posunu o vektor $\vec{v}(2,-1)$, pak je to úplně samé, jako bych jej posunul o vektor $\vec{w}(3,1)=\vec{u}+\vec{v}$: \\
+		\begin{tikzpicture}[scale=0.7]
+			\draw [gray] (-1,-1) grid (6,4);
+			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
+			\draw [->,thick] (0,-1.4)--(0,4.4) node[anchor=north west]{$y$};
+			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
+			\filldraw (5,2) circle (2pt) node[anchor= north west]{$A'$};
+			\draw [->, thick, red] (2,1)--(3,3) node[pos=0.5, above, sloped]{$\vec{u}$};
+			\draw [->, thick, red] (3,3)--(5,2) node[pos=0.5, above, sloped]{$\vec{v}$};
+		\end{tikzpicture}
+		\hspace{1cm}
+		\begin{tikzpicture}[scale=0.7]
+			\draw [gray] (-1,-1) grid (6,4);
+			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
+			\draw [->,thick] (0,-1.4)--(0,4.4) node[anchor=north west]{$y$};
+			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
+			\filldraw (5,2) circle (2pt) node[anchor= north west]{$A'$};
+			\draw [->, thick, red] (2,1)--(3,3) node[pos=0.5, above, sloped]{$\vec{u}$};
+			\draw [->, thick, red] (3,3)--(5,2) node[pos=0.5, above, sloped]{$\vec{v}$};
+			\draw [->, thick, red] (2,1)--(5,2) node[pos=0.5, below, sloped]{$\vec{u}+\vec{v}$};
+		\end{tikzpicture}
+	\end{frame}
+	
+	\begin{frame}{Střed úsečky}
+		\begin{alertblock}{Střed úsečky}
+		Střed úsečky $AB$ daná body $A[x_a,y_a]$ a $B[x_b,y_b]$ rozumíme bod $S$, pro který platí $|AS|=|SB|$. Souřadnice středu se vypočítají následovně: $$S[\dfrac{x_a+x_b}{2};\dfrac{y_a+y_b}{2}]$$
+		\end{alertblock}
+		\begin{tikzpicture}[scale=0.7]
+			\draw [gray] (-1,0) grid (6,4);
+			\draw (2,1) rectangle (5,3);
+			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
+			\draw [->,thick] (0,-0.4)--(0,4.4) node[anchor=north west]{$y$};
+			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
+			\filldraw[red] (3.5,2) circle (2pt) node[above]{$S_{AB}$};
+			\filldraw (5,3) circle (2pt) node[anchor= north west]{$B$};
+			\draw [->, thick, red] (2,1)--(5,3) node[pos=0.7, below, sloped]{$\vec{u}$};
+		\end{tikzpicture}
+	\end{frame}
+	
+	\begin{frame}{Velikost úsečky/vektoru}
+		\begin{alertblock}{Střed úsečky}
+		Velikost úsečky $AB$ daná body $A[x_a,y_a]$ a $B[x_b,y_b]$ rozumíme velikost vektoru $\vec{u}=B-A$. Lze vypočítat následovně: $$|AB|=\vec{u}=\sqrt{(x_b-x_a)^2+(y_b+y_a)^2}=\sqrt{u_x^2+u_y^2}$$
+		\end{alertblock}
+		\begin{tikzpicture}[scale=0.7]
+			\draw [gray] (-1,0) grid (6,4);
+			\draw (2,1) -- (5,1) -- (5,3);
+			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
+			\draw [->,thick] (0,-0.4)--(0,4.4) node[anchor=north west]{$y$};
+			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
+			\filldraw (5,3) circle (2pt) node[anchor= north west]{$B$};
+			\draw [->, thick, red] (2,1)--(5,3) node[pos=0.7, below, sloped]{$\vec{u}$};	
+		\end{tikzpicture}
+	\end{frame}
 
+	\begin{frame}[label=C2]{Cvičení - Střed úsečky a její velikost}
+	\begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
+	\multicolumn{2}{c|}{Určete středy úseček $AB$ a její velikost} & \multicolumn{2}{c}{Určete velikost vektorů:}\\ \hline
+	$A[2;2]$ $B[-1;2]$ & $A[1;1]$ $B[-1;-2]$ & $\vec{v}(1,1)$ &  $\vec{v}(-1,1)$ \\
+	$A[0;2]$ $B[0;-2]$ & $A[1;0]$ $B[-1;-2]$ &  $\vec{v}(3,-4)$ &  $\vec{v}(4,3)$ \\
+	$A[-2;1]$ $B[2;-1]$ & $A[1;1]$ $B[2;2]$ &  $\vec{v}(2,-1)$ &  $\vec{v}(-1,-1)$ \\
+	$A[-2;3]$ $B[4;-5]$ & $A[0;0]$ $B[3;-2]$ &  $\vec{v}(0,-1)$ &  $\vec{v}(-2,3)$ \\
+	\end{tabular}
+	\reseni{Ř2}
+	\end{frame}
 	
 \section{Parametrické vyjádření přímky}
 
@@ -150,7 +224,7 @@
 	
 	\end{frame}
 	
-	\begin{frame}[label=Ř2]{Řešení cvičení - absolutní hodnota \C}
+	\begin{frame}[label=Ř2]{Řešení cvičení - Střed úsečky a její velikost}
 	\zpet{C2}
 	
 	\end{frame}
