@@ -61,6 +61,7 @@
 
 \usepackage{pgfplots} \pgfplotsset{compat=1.18} % ...................pgf pro grafy
 \pgfplotsset{height=200pt} %velikost
+\usetikzlibrary{calc}
 
 \usepackage{multirow} %....................pro lepší tabulky..........
 \renewcommand{\arraystretch}{1.5}
@@ -68,15 +69,17 @@
 \usepackage{cancel} %......................pro škrtání v text
 \renewcommand{\CancelColor}{\color{Red}}
 
+\usepackage{animate}
+
 
 %===================================================== Úpravy pro TUTO prezentaci ====================================================
-\newcommand{\C}{$\mathbb{C}$}
 \newcommand{\reseni}[1]{\hfill \hyperlink{#1}{\beamergotobutton{\Large Řešení}}}
 \newcommand{\zpet}[1]{\hyperlink{#1}{\beamerreturnbutton{\Large Zpět}} \hfill }
 \setbeamercolor{button}{bg=BrickRed}
 \setbeamercolor{block title alerted}{fg=BrickRed,bg=BrickRed!20}
 \setbeamercolor{block body alerted}{fg=black,bg=BrickRed!10}
 \setbeamertemplate{blocks}[rounded][shadow=true]
+
 
 
 %===========================================     ÚVODNÍ SLIDE    =========================================================================
@@ -209,9 +212,42 @@
 	
 \section{Parametrické vyjádření přímky}
 
-	\begin{frame}
-	Tady rovnice
+	\begin{frame}{Jak lze vyjádřit přímku?}
+	To už jsme měli
 	\end{frame} 
+	
+	\begin{frame}[fragile]{Ukázka}
+		\begin{animateinline}[autoplay,loop]{10}
+		\multiframe{180}{i=-120+1}{
+			\begin{tikzpicture}[scale=0.7]
+			\pgfmathsetmacro{\t}{-\i*0.025}
+			\draw[gray,thin] (-5,-5) grid (5,5);
+			\draw[->] (-5.2,0) -- (5.2,0)node[anchor=north east]{$x$};
+			\draw[->] (0,-5.2) -- (0,5.2) node[anchor=north east]{$y$};
+			\coordinate (A) at (-2,-2);
+			\coordinate (v) at (2,1);
+			
+			\foreach \j in {-120,...,\i} {           %vykreslení předcházejích bodů
+			\pgfmathsetmacro{\a}{-\j*0.025}
+    		\fill[black] ($(A)+\a*(v)$) circle (1pt);
+    		}
+    		
+			\fill[black] ($(A)$) circle (2pt) node[above]{$A$};% aktuální bod
+			\draw[red,->,thick] ($(A)$) -- ($(A)+\t*(v)$) node[pos=0.5, above, sloped]{$t\cdot \vec{v}$};% měnící se vektor
+    		
+    		\draw[->,thick] (1,1)--(3,2) node[pos=0.5,above,sloped]{$\vec{u}$};
+    		\node at (-2.8,2.5) {$t=\t$}; %proměňující se číslo
+			\end{tikzpicture}
+		}
+		\end{animateinline}
+	\end{frame}
+	
+	\begin{frame}{Parametrické vyjádření}
+		\begin{alertblock}{Parametrické vyjádření přímky}
+		Nechť je přímka $p$ dána bodem $A[a_x;a_y]$ a vektorem $\vec{v}(v_x;v_y)$. Parametrickým vyjádřením přímky rozumíme všechny rovnice, které dokážou vyjádřit všechny body $P$, pro které platí $P \in p$: $$P=A+t\cdot \vec{v} \ \ \ \ t\in \mathbb{R}$$
+		Někdy se uvádí dvě rovnice pro výpočet příslušných souřadnic bodu $P[x,y]$: $$x=a_x+t\cdot v_x$$ $$y=a_y+t\cdot v_y \ \ \ \ t\in \matbb{R}$$
+		\end{alerblock}
+	\end{frame}
 	
 \section{Obecná rovnice přímky}
 	\begin{frame}
