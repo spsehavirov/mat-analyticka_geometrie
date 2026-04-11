@@ -184,34 +184,35 @@
     Vektory lze sčítat (jedná se o "sčítání posunů"): \medskip
     Vezmu-li bod $A[2,1]$ a posunu jej nejdříve o vektor $\vec{u}(1,2)$ a poté
     jej posunu o vektor $\vec{v}(2,-1)$, pak je to úplně samé, jako bych jej
-    posunul o vektor $\vec{w}(3,1)=\vec{u}+\vec{v}$: \\
-    \begin{tikzpicture}[scale=0.7]
+    posunul o vektor $\vec{w}(3,1)=\vec{u}+\vec{v}$: 
+    \\
+    \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
       \draw[gray] (-1,-1) grid (6,4);
-      \draw[->, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
-      \draw[->, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
+      \draw[-latex, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
+      \draw[-latex, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
       \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
       \filldraw (5,2) circle (2pt) node[anchor=north west] {$A'$};
-      \draw[->, thick, red]
+      \draw[-latex, thick, red]
         (2,1) -- (3,3)
         node[pos=0.5, above, sloped] {$\vec{u}$};
-      \draw[->, thick, red]
+      \draw[-latex, thick, red]
         (3,3) -- (5,2)
         node[pos=0.5, above, sloped] {$\vec{v}$};
     \end{tikzpicture}
     \hspace{1cm}
-    \begin{tikzpicture}[scale=0.7]
+    \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
       \draw[gray] (-1,-1) grid (6,4);
-      \draw[->, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
-      \draw[->, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
+      \draw[-latex, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
+      \draw[-latex, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
       \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
       \filldraw (5,2) circle (2pt) node[anchor=north west] {$A'$};
-      \draw[->, thick, red]
+      \draw[-latex, thick, red]
         (2,1) -- (3,3)
         node[pos=0.5, above, sloped] {$\vec{u}$};
-      \draw[->, thick, red]
+      \draw[-latex, thick, red]
         (3,3) -- (5,2)
         node[pos=0.5, above, sloped] {$\vec{v}$};
-      \draw[->, thick, red]
+      \draw[-latex, thick, teal]
         (2,1) -- (5,2)
         node[pos=0.5, below, sloped] {$\vec{u}+\vec{v}$};
     \end{tikzpicture}
@@ -225,15 +226,15 @@
         S[\dfrac{x_a+x_b}{2};\dfrac{y_a+y_b}{2}]
       \]
     \end{alertblock}
-    \begin{tikzpicture}[scale=0.7]
+    \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
       \draw[gray] (-1,0) grid (6,4);
       \draw (2,1) rectangle (5,3);
-      \draw[->, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
-      \draw[->, thick] (0,-0.4) -- (0,4.4) node[anchor=north west] {$y$};
+      \draw[-latex, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
+      \draw[-latex, thick] (0,-0.4) -- (0,4.4) node[anchor=north west] {$y$};
       \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
       \filldraw[red] (3.5,2) circle (2pt) node[above] {$S_{AB}$};
       \filldraw (5,3) circle (2pt) node[anchor=north west] {$B$};
-      \draw[->, thick, red]
+      \draw[-latex, thick, red]
         (2,1) -- (5,3)
         node[pos=0.7, below, sloped] {$\vec{u}$};
     \end{tikzpicture}
@@ -247,14 +248,14 @@
         |AB|=\vec{u}=\sqrt{(x_{b}-x_{a})^{2}+(y_{b}+y_{a})^{2}}=\sqrt{u_{x}^{2}+u_{y}^{2}}
       \]
     \end{alertblock}
-    \begin{tikzpicture}[scale=0.7]
+    \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
       \draw[gray] (-1,0) grid (6,4);
       \draw (2,1) -- (5,1) -- (5,3);
       \draw[-latex, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
       \draw[-latex, thick] (0,-0.4) -- (0,4.4) node[anchor=north west] {$y$};
       \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
       \filldraw (5,3) circle (2pt) node[anchor=north west] {$B$};
-      \draw[->, thick, red]
+      \draw[-latex, thick, red]
         (2,1) -- (5,3)
         node[pos=0.7, below, sloped] {$\vec{u}$};
     \end{tikzpicture}
@@ -273,104 +274,103 @@
   \end{frame}
 
   \section{Parametrické vyjádření přímky}
-
-  \begin{frame}{Jak lze vyjádřit přímku?}
-    To už jsme měli
-  \end{frame}
-
-
-  \begin{frame}[fragile]{Ukázka}
-    \begin{animateinline}
-      [autoplay,loop]{10} 
-	  	\multiframe{180}{i=-120+1}{ 
-			\begin{tikzpicture}[
-				scale=0.7,
-				line cap=round,
-				line join=round,
-				grid/.style={gray!35, thin},
-				axis/.style={->, thick},
-				vector/.style={red, -latex, thick},
-				refvector/.style={-latex, thick},
-				point/.style={fill=black},
-				current point/.style={fill=black},
-				vector label/.style={pos=0.5, above, sloped},
-				axis label/.style={anchor=north east},
-				info label/.style={anchor=west}
-			]
-				\def\xmin{-5}
-				\def\xmax{5}
-				\def\ymin{-5}
-				\def\ymax{5}
-				
-				\coordinate (A) at (-2,-2);
-				\coordinate (V) at (2,1);
-				\pgfmathsetmacro{\t}{-0.025*\i}
-				
-				\draw[grid] (\xmin,\ymin) grid (\xmax,\ymax);
-				\draw[axis] (\xmin-0.2,0) -- (\xmax+0.2,0) node[axis label] {$x$};
-				\draw[axis] (0,\ymin-0.2) -- (0,\ymax+0.2) node[axis label] {$y$};
-				
-				\foreach \j in {-120,...,\i} {
-				  \pgfmathsetmacro{\a}{-0.025*\j}
-				  \fill[point] ($(A)+\a*(V)$) circle (1pt);
-				}
-				
-				\fill[current point] (A) circle (2pt) node[above] {$A$};
-				
-				\draw[vector] (A) -- ($(A)+\t*(V)$) node[vector label] {$t\cdot\vec{v}$};
-				\draw[refvector] (1,1) -- (3,2) node[vector label] {$\vec{u}$};
-				
-				\node[info label] at (-2.8,2.5) 
-                    {$ t=\pgfmathprintnumber[fixed,precision=3, zerofill]{\t} $};
-			\end{tikzpicture} 
-		}
-    \end{animateinline}
-  \end{frame}
-
-  \begin{frame}{Parametrické vyjádření}
-    \begin{alertblock}{Parametrické vyjádření přímky}
-      Nechť je přímka $p$ dána bodem $A[a_{x};a_{y}]$ a vektorem $\vec{v}(v_{x};v
-      _{y})$. Parametrickým vyjádřením přímky rozumíme všechny rovnice, které dokážou
-      vyjádřit všechny body $P$, pro které platí $P \in p$:
-      \[
-        P=A+t\cdot \vec{v}\ \ \ \ t\in \mathbb{R}
-      \]
-      Někdy se uvádí dvě rovnice pro výpočet příslušných souřadnic bodu $P[x,y]$:
-      \[
-        x=a_{x}+t\cdot v_{x}
-      \]
-      \[
-        y=a_{y}+t\cdot v_{y} \ \ \ \ t\in \mathbb{R}
-      \]
-    \end{alertblock}
-  \end{frame}
+	  \begin{frame}{Jak lze vyjádřit přímku?}
+	    To už jsme měli
+	  \end{frame}
+	
+	
+	  \begin{frame}[fragile]{Ukázka}
+	    \begin{animateinline}
+	      [autoplay,loop]{10} 
+		  	\multiframe{180}{i=-120+1}{ 
+				\begin{tikzpicture}[
+					scale=0.7,
+					line cap=round,
+					line join=round,
+					grid/.style={gray!35, thin},
+					axis/.style={-latex, thick},
+					vector/.style={red, -latex, thick},
+					refvector/.style={-latex, thick},
+					point/.style={fill=black},
+					current point/.style={fill=black},
+					vector label/.style={pos=0.5, above, sloped},
+					axis label/.style={anchor=north east},
+					info label/.style={anchor=west}
+				]
+					\def\xmin{-5}
+					\def\xmax{5}
+					\def\ymin{-5}
+					\def\ymax{5}
+					
+					\coordinate (A) at (-2,-2);
+					\coordinate (V) at (2,1);
+					\pgfmathsetmacro{\t}{-0.025*\i}
+					
+					\draw[grid] (\xmin,\ymin) grid (\xmax,\ymax);
+					\draw[axis] (\xmin-0.2,0) -- (\xmax+0.2,0) node[axis label] {$x$};
+					\draw[axis] (0,\ymin-0.2) -- (0,\ymax+0.2) node[axis label] {$y$};
+					
+					\foreach \j in {-120,...,\i} {
+					  \pgfmathsetmacro{\a}{-0.025*\j}
+					  \fill[point] ($(A)+\a*(V)$) circle (1pt);
+					}
+					
+					\fill[current point] (A) circle (2pt) node[above] {$A$};
+					
+					\draw[vector] (A) -- ($(A)+\t*(V)$) node[vector label] {$t\cdot\vec{v}$};
+					\draw[refvector] (1,1) -- (3,2) node[vector label] {$\vec{u}$};
+					
+					\node[info label] at (-2.8,2.5) 
+	                    {$ t=\pgfmathprintnumber[fixed,precision=3, zerofill]{\t} $};
+				\end{tikzpicture} 
+			}
+	    \end{animateinline}
+	  \end{frame}
+	
+	  \begin{frame}{Parametrické vyjádření}
+	    \begin{alertblock}{Parametrické vyjádření přímky}
+	      Nechť je přímka $p$ dána bodem $A[a_{x};a_{y}]$ a vektorem $\vec{v}(v_{x};v
+	      _{y})$. Parametrickým vyjádřením přímky rozumíme všechny rovnice, které dokážou
+	      vyjádřit všechny body $P$, pro které platí $P \in p$:
+	      \[
+	        P=A+t\cdot \vec{v}\ \ \ \ t\in \mathbb{R}
+	      \]
+	      Někdy se uvádí dvě rovnice pro výpočet příslušných souřadnic bodu $P[x,y]$:
+	      \[
+	        x=a_{x}+t\cdot v_{x}
+	      \]
+	      \[
+	        y=a_{y}+t\cdot v_{y} \ \ \ \ t\in \mathbb{R}
+	      \]
+	    \end{alertblock}
+	  \end{frame}
 
   \section{Obecná rovnice přímky}
-  \begin{frame}
-    Tady rovnice
-  \end{frame}
+	  \begin{frame}
+	    Tady rovnice
+	  \end{frame}
 
   \section{Řešení}
-  \begin{frame}[label=Ř1]{Řešení cvičení - Posun a tvorba vektorů}
-    \zpet{C1}
-  \end{frame}
-
-  \begin{frame}[label=Ř2]{Řešení cvičení - Střed úsečky a její velikost}
-    \zpet{C2}
-  \end{frame}
-
-  \begin{frame}[label=Ř3]{Řešení cvičení - převod na goniometrický tvar}
-    \zpet{C3}
-  \end{frame}
-
-  \begin{frame}[label=Ř4]{Řešení cvičení - převod na algebraický tvar}
-    \zpet{C4}
-  \end{frame}
-  \begin{frame}[label=Ř5]{Řešení cvičení - násobení v GONIO a Moivreova věta}
-    \zpet{C5}
-  \end{frame}
-
-  \begin{frame}[label=Ř6]{Řešení cvičení - lineární rovnice v \C}
-    \zpet{C6}
-  \end{frame}
-\end{document}
+	  \begin{frame}[label=Ř1]{Řešení cvičení - Posun a tvorba vektorů}
+	    \zpet{C1}
+	  \end{frame}
+	
+	  \begin{frame}[label=Ř2]{Řešení cvičení - Střed úsečky a její velikost}
+	    \zpet{C2}
+	  \end{frame}
+	
+	  \begin{frame}[label=Ř3]{Řešení cvičení - převod na goniometrický tvar}
+	    \zpet{C3}
+	  \end{frame}
+	
+	  \begin{frame}[label=Ř4]{Řešení cvičení - převod na algebraický tvar}
+	    \zpet{C4}
+	  \end{frame}
+	  \begin{frame}[label=Ř5]{Řešení cvičení - násobení v GONIO a Moivreova věta}
+	    \zpet{C5}
+	  \end{frame}
+	
+	  \begin{frame}[label=Ř6]{Řešení cvičení - lineární rovnice v \C}
+	    \zpet{C6}
+	  \end{frame}
+  \end{document}
