@@ -1,5 +1,6 @@
 %ÚVODNÍ BALÍKY, VZHLED STRÁNKY
-\documentclass[aspectratio=169]{beamer} %Poměr stran 16:9, 
+\PassOptionsToPackage{dvipsnames}{xcolor} % Barvičky musí být předané před startem beamer-u
+\documentclass[aspectratio=169]{beamer} %Poměr stran 16:9,
 \usetheme{Szeged}
 % Možné argumenty (doporučuji): Metropolis
 % Možné argumenty (další): AnnArbor, Antibes, Bergen, Berkeley, Berlin, Boadilla, boxes, CambridgeUS, Copenhagen, Darmstadt, default, Dresden, Frankfurt, Goettingen, Hannover, Ilmenau, JuanLesPins, Luebeck, Madrid, Malmoe, Marburg, Montpellier, PaloAlto, Pittsburgh, Rochester, Singapore, Szeged, Warsaw
@@ -18,275 +19,358 @@
 \usepackage{multicol} % Sloupce
 \usepackage[shortlabels]{enumitem} % Zkrácené číslování
 % Grafiky - vkládání obrázků
-\usepackage[dvipsnames]{xcolor} % Barvičky
 \usepackage{graphicx} % Základní
 \usepackage{graphbox} % Obalování boxem zvláštních vlastností 1
 \usepackage{adjustbox} % Obalování boxem zvláštních vlastností 2
 % Matematické zápisy
 \usepackage{mathtools} % Rozšíření asmmath - všechna matika.
-\usepackage{amsfonts} % Matematické fonty
-\usepackage{amssymb} % Matematické symboly
 \usepackage{array}
 %\usepackage[shortlabels]{enumitem}
-%Balíčky s běžnými fonty a znakovými sadami
-\usepackage[czech]{babel} % Čeština
-\usepackage[utf8]{inputenc}   % Varianta pro unicode UTF-8
-% \usepackage[latin2]{inputenc} % Varianta pro iso8859-2
-% \usepackage[cp1250]{inputenc} % Varianta pro win1250
 
- %Vlastní příkazy
- \NewDocumentCommand{\highlight}{ +m }{\textbf{\color{ForestGreen}#1}}
- \NewDocumentCommand{\Highlight}{ +m }{\noindent\textbf{\color{ForestGreen}#1}}
- \newcommand{\predepsaneKody}[1]{}
- 
- %Vlastní barvy 
- \definecolor{Gray}{gray}{0.5} 
+% Čeština a znakové sady
+\usepackage[czech, shorthands=off]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Moderní a matematické fonty
+\usepackage{lmodern}
+\usepackage{amsfonts} % Matematické fonty
+\usepackage{amssymb} % Matematické symboly
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
 
- %Definice sloupců tabulek typu Centerer, Left a Right
- \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
- \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
- \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
- 
- \DeclareMathOperator\tg{tg}
- \DeclareMathOperator\cotg{cotg}
- 
-%==================================================  Krajíčkovské úpravy  ================================================================
-\usepackage{parskip}
+%Vlastní příkazy
+\NewDocumentCommand{\highlight}{ +m }{\textbf{\color{ForestGreen}
+#1}}
+\NewDocumentCommand{\Highlight}{ +m }{\noindent
+\textbf{\color{ForestGreen}
+#1}}
+\newcommand{\predepsaneKody}[1]{}
+
+%Vlastní barvy
+\definecolor{Gray}{gray}{0.5}
+
+%Definice sloupců tabulek typu Centerer, Left a Right
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\cotg}{cotg}
+
+% ===  Krajíčkovské úpravy  ===
 \usepackage{xparse}
+\usepackage{parskip}
 
-\usefonttheme[onlymath]{serif} %...........pro dobrý matematický text
+% Matematický font
+\usefonttheme[onlymath]{serif}
 
-\usepackage{hyperref}%.....................odkazy na web
-\newcommand{\link}[2]{\href{#1}{\color{Cyan}\underline{\smash{#2}}}}
+% Odkazy
+\usepackage{hyperref}
+\newcommand{\link}[2]{\href{#1}{\color{Cyan}
+\underline{\smash{#2}}}}
 
-\usepackage{pgfplots} \pgfplotsset{compat=1.18} % ...................pgf pro grafy
+% PGF Grafy
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \pgfplotsset{height=200pt} %velikost
 \usetikzlibrary{calc}
 
-\usepackage{multirow} %....................pro lepší tabulky..........
+% Lepší tabulky.
+\usepackage{multirow}
 \renewcommand{\arraystretch}{1.5}
 
-\usepackage{cancel} %......................pro škrtání v text
+% Škrtání v text
+\usepackage{cancel}
 \renewcommand{\CancelColor}{\color{Red}}
 
+% Animace
 \usepackage{animate}
 
-
-%===================================================== Úpravy pro TUTO prezentaci ====================================================
-\newcommand{\reseni}[1]{\hfill \hyperlink{#1}{\beamergotobutton{\Large Řešení}}}
-\newcommand{\zpet}[1]{\hyperlink{#1}{\beamerreturnbutton{\Large Zpět}} \hfill }
+% === Úpravy pro TUTO prezentaci ===
+\newcommand{\reseni}[1]{\hfill \hyperlink{#1}{\beamergotobutton{\strut Řešení}}}
+\newcommand{\zpet}[1]{\hyperlink{#1}{\beamerreturnbutton{\strut Zpět}} \hfill }
 \setbeamercolor{button}{bg=BrickRed}
-\setbeamercolor{block title alerted}{fg=BrickRed,bg=BrickRed!20}
-\setbeamercolor{block body alerted}{fg=black,bg=BrickRed!10}
+\setbeamercolor{block title alerted}{fg=BrickRed, bg=BrickRed!20}
+\setbeamercolor{block body alerted}{fg=black, bg=BrickRed!10}
 \setbeamertemplate{blocks}[rounded][shadow=true]
 
-
-
-%===========================================     ÚVODNÍ SLIDE    =========================================================================
+% ===   ÚVODNÍ SLIDE   ===
 \title{Analytická geometrie}
 \author{II. ročník}
 \date{Aktualizace: \today}
+
+
 \begin{document}
-\maketitle
+  \maketitle
 
-%JÁDRO PREZENTACE
-\section{Úvod - objekty}
+  % JÁDRO PREZENTACE
+  \section{Úvod - objekty}
 
-	\begin{frame}{K čemu to všechno?}
-		Analytická geometrie (AnaGeo) je jedním ze způsobů, jak nahlížet na geometrické problémy (např. kde se protnou přímky, protnou se vůbec? Co je to přímka?) \\[2ex]
-		AnaGeo používá nástroje analýzy (rovnice, vlastnosti rovnic a funkcí) - je třeba mít na paměti, co rovnice a čísla reprezentují, protože se na první pohled bude zdát, že jsme se vrátili do 1. ročníku \\[2ex]
-		Nicméně vše zasadíme do \textbf{vektorového prostoru} \\[2ex]
-		\textbf{Příklad:} Bod ležící na přímce
-	\end{frame}
+  \begin{frame}{K čemu to všechno?}
+    Analytická geometrie (AnaGeo) je jedním ze způsobů, jak nahlížet na
+    geometrické problémy (např. kde se protnou přímky, protnou se vůbec? Co je
+    to přímka?)
 	
-	\begin{frame}{Pojmy}
-		K tomu, abychom mohli bezpečně pokračovat, je třeba si udělat společnou slovní zásobu (kterou budu aktivně využívat): \\[2ex]
-			\begin{tabular}{C{3cm} C{3cm} C{3cm} C{3cm}}
-			Vektor & Skalár & Přímka & Směrnice \\
-			Bod & Směrový vektor & Normálový vektor & Obecný tvar \\
-			Parametrický tvar & Parametr & Směrnicový tvar & Rovina \\
-			Skalární součin & Vektorový součin & Posun o vektor & Odchylka \\
-			Velikost vektoru & Nulový vektor & Počátek & ... \\
-			\end{tabular}
-	\end{frame}
+	\medskip
+    AnaGeo používá nástroje analýzy (rovnice, vlastnosti rovnic a funkcí) - je třeba
+    mít na paměti, co rovnice a čísla reprezentují, protože se na první pohled bude
+    zdát, že jsme se vrátili do 1. ročníku 
 	
-	\begin{frame}{Bod x Vektor}
-		\begin{alertblock}{Bod}
-		Bodem rozumíme prvek roviny v kartézské soustavě souřadnic. Značíme velkým písmenem a jeho souřadnice ohraničujeme hranatými závorkami: $$A[2;-3]$$
-		\end{alertblock}
-		Bod pro nás není nic nového - známe jej už do funkcí. Nicméně to co je nové je \textbf{vektor}:
-		\begin{alertblock}{Vektor}
-		Vektorem rozumíme prvek vektorového prostoru. Vektor má \textbf{směr} a \textbf{velikost}. Vektor označujeme malým psacím písmenem s šipkou a jeho "směr" značíme do kulatých závorek: $$\vec{v}(2;-3)$$
-		\end{alertblock}
-	\end{frame}
+	\medskip
+    Nicméně vše zasadíme do \textbf{vektorového prostoru} 
 	
-	\begin{frame}{Bod x Vektor}
-	Tady obrázky
-	\end{frame}
-	
-	\begin{frame}{Určování vektorů}
-	BUde
-	\end{frame}
-	
-	\begin{frame}{Posunutí}
-	Bude
-	\end{frame}
-	
-	\begin{frame}[label=C1]{Cvičení - Posun a tvorba vektorů}
-	\begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
-	\multicolumn{2}{c|}{Vytvořte a nakreslete vektory $\vec{v}=B-A$:} & \multicolumn{2}{c}{Posuňte bod $A$ o vektor $\vec{v}$:}\\ \hline
-	$A[2;2]$ $B[-1;2]$ & $A[1;1]$ $B[-1;-2]$ & $A[1;0]$ $\vec{v}(1,1)$ & $A[1;0]$ $\vec{v}(-1,1)$ \\
-	$A[0;2]$ $B[0;-2]$ & $A[1;0]$ $B[-1;-2]$ & $A[-1;2]$ $\vec{v}(1,-1)$ & $A[2;2]$ $\vec{v}(-1,2)$ \\
-	$A[-2;1]$ $B[2;-1]$ & $A[1;1]$ $B[2;2]$ & $A[-2;2]$ $\vec{v}(2,-1)$ & $A[2;3]$ $\vec{v}(-1,-1)$ \\
-	$A[-2;3]$ $B[4;-5]$ & $A[0;0]$ $B[3;-2]$ & $A[0;2]$ $\vec{v}(0,-1)$ & $A[3;2]$ $\vec{v}(-2,3)$ \\
-	\end{tabular}
-	\reseni{Ř1}
-	\end{frame}
-	
-	\begin{frame}{Sčítání vektorů}
-	Vektory lze sčítat (jedná se o "sčítání posunů"): \\[2ex]
-	Vezmu-li bod $A[2,1]$ a posunu jej nejdříve o vektor $\vec{u}(1,2)$ a poté jej posunu o vektor $\vec{v}(2,-1)$, pak je to úplně samé, jako bych jej posunul o vektor $\vec{w}(3,1)=\vec{u}+\vec{v}$: \\
-		\begin{tikzpicture}[scale=0.7]
-			\draw [gray] (-1,-1) grid (6,4);
-			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
-			\draw [->,thick] (0,-1.4)--(0,4.4) node[anchor=north west]{$y$};
-			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
-			\filldraw (5,2) circle (2pt) node[anchor= north west]{$A'$};
-			\draw [->, thick, red] (2,1)--(3,3) node[pos=0.5, above, sloped]{$\vec{u}$};
-			\draw [->, thick, red] (3,3)--(5,2) node[pos=0.5, above, sloped]{$\vec{v}$};
-		\end{tikzpicture}
-		\hspace{1cm}
-		\begin{tikzpicture}[scale=0.7]
-			\draw [gray] (-1,-1) grid (6,4);
-			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
-			\draw [->,thick] (0,-1.4)--(0,4.4) node[anchor=north west]{$y$};
-			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
-			\filldraw (5,2) circle (2pt) node[anchor= north west]{$A'$};
-			\draw [->, thick, red] (2,1)--(3,3) node[pos=0.5, above, sloped]{$\vec{u}$};
-			\draw [->, thick, red] (3,3)--(5,2) node[pos=0.5, above, sloped]{$\vec{v}$};
-			\draw [->, thick, red] (2,1)--(5,2) node[pos=0.5, below, sloped]{$\vec{u}+\vec{v}$};
-		\end{tikzpicture}
-	\end{frame}
-	
-	\begin{frame}{Střed úsečky}
-		\begin{alertblock}{Střed úsečky}
-		Střed úsečky $AB$ daná body $A[x_a,y_a]$ a $B[x_b,y_b]$ rozumíme bod $S$, pro který platí $|AS|=|SB|$. Souřadnice středu se vypočítají následovně: $$S[\dfrac{x_a+x_b}{2};\dfrac{y_a+y_b}{2}]$$
-		\end{alertblock}
-		\begin{tikzpicture}[scale=0.7]
-			\draw [gray] (-1,0) grid (6,4);
-			\draw (2,1) rectangle (5,3);
-			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
-			\draw [->,thick] (0,-0.4)--(0,4.4) node[anchor=north west]{$y$};
-			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
-			\filldraw[red] (3.5,2) circle (2pt) node[above]{$S_{AB}$};
-			\filldraw (5,3) circle (2pt) node[anchor= north west]{$B$};
-			\draw [->, thick, red] (2,1)--(5,3) node[pos=0.7, below, sloped]{$\vec{u}$};
-		\end{tikzpicture}
-	\end{frame}
-	
-	\begin{frame}{Velikost úsečky/vektoru}
-		\begin{alertblock}{Střed úsečky}
-		Velikost úsečky $AB$ daná body $A[x_a,y_a]$ a $B[x_b,y_b]$ rozumíme velikost vektoru $\vec{u}=B-A$. Lze vypočítat následovně: $$|AB|=\vec{u}=\sqrt{(x_b-x_a)^2+(y_b+y_a)^2}=\sqrt{u_x^2+u_y^2}$$
-		\end{alertblock}
-		\begin{tikzpicture}[scale=0.7]
-			\draw [gray] (-1,0) grid (6,4);
-			\draw (2,1) -- (5,1) -- (5,3);
-			\draw [->,thick] (-1.4,0)--(6.4,0) node[anchor=south east]{$x$};
-			\draw [->,thick] (0,-0.4)--(0,4.4) node[anchor=north west]{$y$};
-			\filldraw (2,1) circle (2pt) node[anchor=north east]{$A$};
-			\filldraw (5,3) circle (2pt) node[anchor= north west]{$B$};
-			\draw [->, thick, red] (2,1)--(5,3) node[pos=0.7, below, sloped]{$\vec{u}$};	
-		\end{tikzpicture}
-	\end{frame}
+	\medskip
+    \textbf{Příklad:} Bod ležící na přímce
+  \end{frame}
 
-	\begin{frame}[label=C2]{Cvičení - Střed úsečky a její velikost}
-	\begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
-	\multicolumn{2}{c|}{Určete středy úseček $AB$ a její velikost} & \multicolumn{2}{c}{Určete velikost vektorů:}\\ \hline
-	$A[2;2]$ $B[-1;2]$ & $A[1;1]$ $B[-1;-2]$ & $\vec{v}(1,1)$ &  $\vec{v}(-1,1)$ \\
-	$A[0;2]$ $B[0;-2]$ & $A[1;0]$ $B[-1;-2]$ &  $\vec{v}(3,-4)$ &  $\vec{v}(4,3)$ \\
-	$A[-2;1]$ $B[2;-1]$ & $A[1;1]$ $B[2;2]$ &  $\vec{v}(2,-1)$ &  $\vec{v}(-1,-1)$ \\
-	$A[-2;3]$ $B[4;-5]$ & $A[0;0]$ $B[3;-2]$ &  $\vec{v}(0,-1)$ &  $\vec{v}(-2,3)$ \\
-	\end{tabular}
-	\reseni{Ř2}
-	\end{frame}
+  \begin{frame}{Pojmy}
+    K tomu, abychom mohli bezpečně pokračovat, je třeba si udělat společnou slovní
+    zásobu (kterou budu aktivně využívat):
 	
-\section{Parametrické vyjádření přímky}
+	\medskip
+    \begin{tabular}{C{3cm} C{3cm} C{3cm} C{3cm}}
+      Vektor            & Skalár           & Přímka           & Směrnice    \\
+      Bod               & Směrový vektor   & Normálový vektor & Obecný tvar \\
+      Parametrický tvar & Parametr         & Směrnicový tvar  & Rovina      \\
+      Skalární součin   & Vektorový součin & Posun o vektor   & Odchylka    \\
+      Velikost vektoru  & Nulový vektor    & Počátek          & ...         \\
+    \end{tabular}
+  \end{frame}
 
-	\begin{frame}{Jak lze vyjádřit přímku?}
-	To už jsme měli
-	\end{frame} 
-	
-	\begin{frame}[fragile]{Ukázka}
-		\begin{animateinline}[autoplay,loop]{10}
-		\multiframe{180}{i=-120+1}{
-			\begin{tikzpicture}[scale=0.7]
-			\pgfmathsetmacro{\t}{-\i*0.025}
-			\draw[gray,thin] (-5,-5) grid (5,5);
-			\draw[->] (-5.2,0) -- (5.2,0)node[anchor=north east]{$x$};
-			\draw[->] (0,-5.2) -- (0,5.2) node[anchor=north east]{$y$};
-			\coordinate (A) at (-2,-2);
-			\coordinate (v) at (2,1);
-			
-			\foreach \j in {-120,...,\i} {           %vykreslení předcházejích bodů
-			\pgfmathsetmacro{\a}{-\j*0.025}
-    		\fill[black] ($(A)+\a*(v)$) circle (1pt);
-    		}
-    		
-			\fill[black] ($(A)$) circle (2pt) node[above]{$A$};% aktuální bod
-			\draw[red,->,thick] ($(A)$) -- ($(A)+\t*(v)$) node[pos=0.5, above, sloped]{$t\cdot \vec{v}$};% měnící se vektor
-    		
-    		\draw[->,thick] (1,1)--(3,2) node[pos=0.5,above,sloped]{$\vec{u}$};
-    		\node at (-2.8,2.5) {$t=\t$}; %proměňující se číslo
-			\end{tikzpicture}
+  \begin{frame}{Bod x Vektor}
+    \begin{alertblock}{Bod}
+      Bodem rozumíme prvek roviny v kartézské soustavě souřadnic. Značíme velkým
+      písmenem a jeho souřadnice ohraničujeme hranatými závorkami:
+      \[
+        A[2;-3]
+      \]
+    \end{alertblock}
+    Bod pro nás není nic nového - známe jej už do funkcí. Nicméně to co je nové
+    je \textbf{vektor}:
+    \begin{alertblock}{Vektor}
+      Vektorem rozumíme prvek vektorového prostoru. Vektor má \textbf{směr} a \textbf{velikost}.
+      Vektor označujeme malým psacím písmenem s šipkou a jeho "směr" značíme do kulatých
+      závorek:
+      \[
+        \vec{v}(2;-3)
+      \]
+    \end{alertblock}
+  \end{frame}
+
+  \begin{frame}{Bod x Vektor}
+    Tady obrázky
+  \end{frame}
+
+  \begin{frame}{Určování vektorů}
+    BUde
+  \end{frame}
+
+  \begin{frame}{Posunutí}
+    Bude
+  \end{frame}
+
+  \begin{frame}[label=C1]{Cvičení - Posun a tvorba vektorů}
+    \begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
+      \multicolumn{2}{c|}{Vytvořte a nakreslete vektory $\vec{v}=B-A$:} & \multicolumn{2}{c}{Posuňte bod $A$ o vektor $\vec{v}$:} \\
+      \hline
+      $A[2;2]$ $B[-1;2]$                                                & $A[1;1]$ $B[-1;-2]$                                    & $A[1;0]$ $\vec{v}(1,1)$   & $A[1;0]$ $\vec{v}(-1,1)$  \\
+      $A[0;2]$ $B[0;-2]$                                                & $A[1;0]$ $B[-1;-2]$                                    & $A[-1;2]$ $\vec{v}(1,-1)$ & $A[2;2]$ $\vec{v}(-1,2)$  \\
+      $A[-2;1]$ $B[2;-1]$                                               & $A[1;1]$ $B[2;2]$                                      & $A[-2;2]$ $\vec{v}(2,-1)$ & $A[2;3]$ $\vec{v}(-1,-1)$ \\
+      $A[-2;3]$ $B[4;-5]$                                               & $A[0;0]$ $B[3;-2]$                                     & $A[0;2]$ $\vec{v}(0,-1)$  & $A[3;2]$ $\vec{v}(-2,3)$  \\
+    \end{tabular}
+    \reseni{Ř1}
+  \end{frame}
+
+  \begin{frame}{Sčítání vektorů}
+    Vektory lze sčítat (jedná se o "sčítání posunů"): \medskip
+    Vezmu-li bod $A[2,1]$ a posunu jej nejdříve o vektor $\vec{u}(1,2)$ a poté
+    jej posunu o vektor $\vec{v}(2,-1)$, pak je to úplně samé, jako bych jej
+    posunul o vektor $\vec{w}(3,1)=\vec{u}+\vec{v}$: \\
+    \begin{tikzpicture}[scale=0.7]
+      \draw[gray] (-1,-1) grid (6,4);
+      \draw[->, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
+      \draw[->, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
+      \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
+      \filldraw (5,2) circle (2pt) node[anchor=north west] {$A'$};
+      \draw[->, thick, red]
+        (2,1) -- (3,3)
+        node[pos=0.5, above, sloped] {$\vec{u}$};
+      \draw[->, thick, red]
+        (3,3) -- (5,2)
+        node[pos=0.5, above, sloped] {$\vec{v}$};
+    \end{tikzpicture}
+    \hspace{1cm}
+    \begin{tikzpicture}[scale=0.7]
+      \draw[gray] (-1,-1) grid (6,4);
+      \draw[->, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
+      \draw[->, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
+      \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
+      \filldraw (5,2) circle (2pt) node[anchor=north west] {$A'$};
+      \draw[->, thick, red]
+        (2,1) -- (3,3)
+        node[pos=0.5, above, sloped] {$\vec{u}$};
+      \draw[->, thick, red]
+        (3,3) -- (5,2)
+        node[pos=0.5, above, sloped] {$\vec{v}$};
+      \draw[->, thick, red]
+        (2,1) -- (5,2)
+        node[pos=0.5, below, sloped] {$\vec{u}+\vec{v}$};
+    \end{tikzpicture}
+  \end{frame}
+
+  \begin{frame}{Střed úsečky}
+    \begin{alertblock}{Střed úsečky}
+      Střed úsečky $AB$ daná body $A[x_{a},y_{a}]$ a $B[x_{b},y_{b}]$ rozumíme bod
+      $S$, pro který platí $|AS|=|SB|$. Souřadnice středu se vypočítají následovně:
+      \[
+        S[\dfrac{x_a+x_b}{2};\dfrac{y_a+y_b}{2}]
+      \]
+    \end{alertblock}
+    \begin{tikzpicture}[scale=0.7]
+      \draw[gray] (-1,0) grid (6,4);
+      \draw (2,1) rectangle (5,3);
+      \draw[->, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
+      \draw[->, thick] (0,-0.4) -- (0,4.4) node[anchor=north west] {$y$};
+      \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
+      \filldraw[red] (3.5,2) circle (2pt) node[above] {$S_{AB}$};
+      \filldraw (5,3) circle (2pt) node[anchor=north west] {$B$};
+      \draw[->, thick, red]
+        (2,1) -- (5,3)
+        node[pos=0.7, below, sloped] {$\vec{u}$};
+    \end{tikzpicture}
+  \end{frame}
+
+  \begin{frame}{Velikost úsečky/vektoru}
+    \begin{alertblock}{Střed úsečky}
+      Velikost úsečky $AB$ daná body $A[x_{a},y_{a}]$ a $B[x_{b},y_{b}]$ rozumíme
+      velikost vektoru $\vec{u}=B-A$. Lze vypočítat následovně:
+      \[
+        |AB|=\vec{u}=\sqrt{(x_{b}-x_{a})^{2}+(y_{b}+y_{a})^{2}}=\sqrt{u_{x}^{2}+u_{y}^{2}}
+      \]
+    \end{alertblock}
+    \begin{tikzpicture}[scale=0.7]
+      \draw[gray] (-1,0) grid (6,4);
+      \draw (2,1) -- (5,1) -- (5,3);
+      \draw[-latex, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
+      \draw[-latex, thick] (0,-0.4) -- (0,4.4) node[anchor=north west] {$y$};
+      \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
+      \filldraw (5,3) circle (2pt) node[anchor=north west] {$B$};
+      \draw[->, thick, red]
+        (2,1) -- (5,3)
+        node[pos=0.7, below, sloped] {$\vec{u}$};
+    \end{tikzpicture}
+  \end{frame}
+
+  \begin{frame}[label=C2]{Cvičení - Střed úsečky a její velikost}
+    \begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
+      \multicolumn{2}{c|}{Určete středy úseček $AB$ a její velikost} & \multicolumn{2}{c}{Určete velikost vektorů:} \\
+      \hline
+      $A[2;2]$ $B[-1;2]$                                             & $A[1;1]$ $B[-1;-2]$                         & $\vec{v}(1,1)$  & $\vec{v}(-1,1)$  \\
+      $A[0;2]$ $B[0;-2]$                                             & $A[1;0]$ $B[-1;-2]$                         & $\vec{v}(3,-4)$ & $\vec{v}(4,3)$   \\
+      $A[-2;1]$ $B[2;-1]$                                            & $A[1;1]$ $B[2;2]$                           & $\vec{v}(2,-1)$ & $\vec{v}(-1,-1)$ \\
+      $A[-2;3]$ $B[4;-5]$                                            & $A[0;0]$ $B[3;-2]$                          & $\vec{v}(0,-1)$ & $\vec{v}(-2,3)$  \\
+    \end{tabular}
+    \reseni{Ř2}
+  \end{frame}
+
+  \section{Parametrické vyjádření přímky}
+
+  \begin{frame}{Jak lze vyjádřit přímku?}
+    To už jsme měli
+  \end{frame}
+
+
+  \begin{frame}[fragile]{Ukázka}
+    \begin{animateinline}
+      [autoplay,loop]{10} 
+	  	\multiframe{180}{i=-120+1}{ 
+			\begin{tikzpicture}[
+				scale=0.7,
+				line cap=round,
+				line join=round,
+				grid/.style={gray!35, thin},
+				axis/.style={->, thick},
+				vector/.style={red, -latex, thick},
+				refvector/.style={-latex, thick},
+				point/.style={fill=black},
+				current point/.style={fill=black},
+				vector label/.style={pos=0.5, above, sloped},
+				axis label/.style={anchor=north east},
+				info label/.style={anchor=west}
+			]
+				\def\xmin{-5}
+				\def\xmax{5}
+				\def\ymin{-5}
+				\def\ymax{5}
+				
+				\coordinate (A) at (-2,-2);
+				\coordinate (V) at (2,1);
+				\pgfmathsetmacro{\t}{-0.025*\i}
+				
+				\draw[grid] (\xmin,\ymin) grid (\xmax,\ymax);
+				\draw[axis] (\xmin-0.2,0) -- (\xmax+0.2,0) node[axis label] {$x$};
+				\draw[axis] (0,\ymin-0.2) -- (0,\ymax+0.2) node[axis label] {$y$};
+				
+				\foreach \j in {-120,...,\i} {
+				  \pgfmathsetmacro{\a}{-0.025*\j}
+				  \fill[point] ($(A)+\a*(V)$) circle (1pt);
+				}
+				
+				\fill[current point] (A) circle (2pt) node[above] {$A$};
+				
+				\draw[vector] (A) -- ($(A)+\t*(V)$) node[vector label] {$t\cdot\vec{v}$};
+				\draw[refvector] (1,1) -- (3,2) node[vector label] {$\vec{u}$};
+				
+				\node[info label] at (-2.8,2.5) 
+                    {$ t=\pgfmathprintnumber[fixed,precision=3, zerofill]{\t} $};
+			\end{tikzpicture} 
 		}
-		\end{animateinline}
-	\end{frame}
-	
-	\begin{frame}{Parametrické vyjádření}
-		\begin{alertblock}{Parametrické vyjádření přímky}
-		Nechť je přímka $p$ dána bodem $A[a_x;a_y]$ a vektorem $\vec{v}(v_x;v_y)$. Parametrickým vyjádřením přímky rozumíme všechny rovnice, které dokážou vyjádřit všechny body $P$, pro které platí $P \in p$: $$P=A+t\cdot \vec{v} \ \ \ \ t\in \mathbb{R}$$
-		Někdy se uvádí dvě rovnice pro výpočet příslušných souřadnic bodu $P[x,y]$: $$x=a_x+t\cdot v_x$$ $$y=a_y+t\cdot v_y \ \ \ \ t\in \matbb{R}$$
-		\end{alerblock}
-	\end{frame}
-	
-\section{Obecná rovnice přímky}
-	\begin{frame}
-	Tady rovnice
-	\end{frame} 
+    \end{animateinline}
+  \end{frame}
 
-\section{Řešení}
-	\begin{frame}[label=Ř1]{Řešení cvičení - Posun a tvorba vektorů}
-	\zpet{C1}
-	
-	\end{frame}
-	
-	\begin{frame}[label=Ř2]{Řešení cvičení - Střed úsečky a její velikost}
-	\zpet{C2}
-	
-	\end{frame}
-	
-	\begin{frame}[label=Ř3]{Řešení cvičení - převod na goniometrický tvar}
-	\zpet{C3}
-	
-	\end{frame}
-	
-	\begin{frame}[label=Ř4]{Řešení cvičení - převod na algebraický tvar}
-	\zpet{C4}
+  \begin{frame}{Parametrické vyjádření}
+    \begin{alertblock}{Parametrické vyjádření přímky}
+      Nechť je přímka $p$ dána bodem $A[a_{x};a_{y}]$ a vektorem $\vec{v}(v_{x};v
+      _{y})$. Parametrickým vyjádřením přímky rozumíme všechny rovnice, které dokážou
+      vyjádřit všechny body $P$, pro které platí $P \in p$:
+      \[
+        P=A+t\cdot \vec{v}\ \ \ \ t\in \mathbb{R}
+      \]
+      Někdy se uvádí dvě rovnice pro výpočet příslušných souřadnic bodu $P[x,y]$:
+      \[
+        x=a_{x}+t\cdot v_{x}
+      \]
+      \[
+        y=a_{y}+t\cdot v_{y} \ \ \ \ t\in \mathbb{R}
+      \]
+    \end{alertblock}
+  \end{frame}
 
-	\end{frame}
-	\begin{frame}[label=Ř5]{Řešení cvičení - násobení v GONIO a Moivreova věta}
-	\zpet{C5}
-	
-	\end{frame}
+  \section{Obecná rovnice přímky}
+  \begin{frame}
+    Tady rovnice
+  \end{frame}
 
-	\begin{frame}[label=Ř6]{Řešení cvičení - lineární rovnice v \C}
-	\zpet{C6}
+  \section{Řešení}
+  \begin{frame}[label=Ř1]{Řešení cvičení - Posun a tvorba vektorů}
+    \zpet{C1}
+  \end{frame}
 
-	\end{frame}
+  \begin{frame}[label=Ř2]{Řešení cvičení - Střed úsečky a její velikost}
+    \zpet{C2}
+  \end{frame}
 
+  \begin{frame}[label=Ř3]{Řešení cvičení - převod na goniometrický tvar}
+    \zpet{C3}
+  \end{frame}
 
+  \begin{frame}[label=Ř4]{Řešení cvičení - převod na algebraický tvar}
+    \zpet{C4}
+  \end{frame}
+  \begin{frame}[label=Ř5]{Řešení cvičení - násobení v GONIO a Moivreova věta}
+    \zpet{C5}
+  \end{frame}
 
-
-
+  \begin{frame}[label=Ř6]{Řešení cvičení - lineární rovnice v \C}
+    \zpet{C6}
+  \end{frame}
 \end{document}
-
