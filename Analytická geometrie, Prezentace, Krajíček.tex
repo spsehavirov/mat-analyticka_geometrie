@@ -78,12 +78,34 @@
 \usepackage{multirow}
 \renewcommand{\arraystretch}{1.5}
 
-% Škrtání v text
+% Škrtání v textu
 \usepackage{cancel}
 \renewcommand{\CancelColor}{\color{Red}}
 
 % Animace
 \usepackage{animate}
+
+%Příkaz pro vykreslení grafu
+\NewDocumentCommand{\vgraf}{O{red} m}{%
+  \begin{tikzpicture}[font=\footnotesize,scale=0.6]
+    \begin{axis}[
+      axis lines=middle,
+      xmin=-5.2, xmax=5.2,
+      ymin=-5.2, ymax=5.2,
+      xlabel=$x$, ylabel=$y$,
+      grid=major,
+      samples=250,
+      ytick = {-5,-4,...,4,5},     
+    xtick = {-5,-4,...,4,5},
+    x=0.8cm, y=0.8cm,
+    ]
+      % ---- přidá všechny funkce oddělené čárkami ----
+      \pgfplotsinvokeforeach{#2}{%
+        \addplot[samples=250, color=#1]{##1};
+      }
+    \end{axis}
+  \end{tikzpicture}%
+}
 
 % === Úpravy pro TUTO prezentaci ===
 \newcommand{\reseni}[1]{\hfill \hyperlink{#1}{\beamergotobutton{\strut Řešení}}}
@@ -161,7 +183,36 @@
   \end{frame}
 
   \begin{frame}{Určování vektorů}
-    BUde
+    Vektor nám určuje směr a má danou velikost. Buď je dán anebo si jej můžeme určit:
+     \begin{itemize}
+      \item pomocí změny (o kolik se posuny $x$-ová a $y$-ová souřadnice)
+      \item pomocí dvojice bodů 
+     \end{itemize}
+     \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
+       \draw[gray] (-1,-1) grid (5,4);
+       \draw[-latex, thick] (-1.4,0) -- (5.4,0) node[anchor=south east] {$x$};
+       \draw[-latex, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
+       \filldraw (1,1) circle (2pt) node[anchor=north east] {$A$};
+       \filldraw (4,3) circle (2pt) node[anchor=south west] {$B$};
+       \draw[-latex, thick, red]
+        (1,1) -- (4,3) node[pos=0.5, above, sloped] {$\vec{u}(3,2)$}; 
+       \draw[-latex, black]
+        (1,1) -- (4,1) node[pos=0.5, below]{$\Delta x = 3$} -- (4,3) node[pos=0.5, anchor=west]{$\Delta y = 2$};      
+     \end{tikzpicture} \hspace{1cm}
+     \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
+       \draw[gray] (-1,-1) grid (5,4);
+       \draw[-latex, thick] (-1.4,0) -- (5.4,0) node[anchor=south east] {$x$};
+       \draw[-latex, thick] (0,-1.4) -- (0,4.4) node[anchor=north west] {$y$};
+       \filldraw (1,1) circle (2pt) node[anchor=north east] {$A$};
+       \filldraw (4,3) circle (2pt) node[anchor=south west] {$B$};
+       \draw[-latex, thick, red]
+        (1,1) -- (4,3)
+        node[pos=0.5, above, sloped,red] {$\overrightarrow{AB}(2,1)$};
+       \draw[blue]
+        (1,1) -- (4,1) node[pos=0.5, below, black]{\tiny $B_x - A_x = 3$};
+       \draw[blue]
+        (4,1) -- (4,3) node[pos=0.5, anchor=west, black]{\tiny $B_y - A_y = 2$};     
+     \end{tikzpicture}
   \end{frame}
 
   \begin{frame}{Posunutí}
@@ -172,10 +223,10 @@
     \begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
       \multicolumn{2}{c|}{Vytvořte a nakreslete vektory $\vec{v}=B-A$:} & \multicolumn{2}{c}{Posuňte bod $A$ o vektor $\vec{v}$:} \\
       \hline
-      $A[2;2]$ $B[-1;2]$                                                & $A[1;1]$ $B[-1;-2]$                                    & $A[1;0]$ $\vec{v}(1,1)$   & $A[1;0]$ $\vec{v}(-1,1)$  \\
-      $A[0;2]$ $B[0;-2]$                                                & $A[1;0]$ $B[-1;-2]$                                    & $A[-1;2]$ $\vec{v}(1,-1)$ & $A[2;2]$ $\vec{v}(-1,2)$  \\
-      $A[-2;1]$ $B[2;-1]$                                               & $A[1;1]$ $B[2;2]$                                      & $A[-2;2]$ $\vec{v}(2,-1)$ & $A[2;3]$ $\vec{v}(-1,-1)$ \\
-      $A[-2;3]$ $B[4;-5]$                                               & $A[0;0]$ $B[3;-2]$                                     & $A[0;2]$ $\vec{v}(0,-1)$  & $A[3;2]$ $\vec{v}(-2,3)$  \\
+      $A[2;2]$ $B[-1;2]$    & $A[1;1]$ $B[-1;-2]$   & $A[1;0]$ $\vec{v}(1,1)$   & $A[1;0]$ $\vec{v}(-1,1)$  \\
+      $A[0;2]$ $B[0;-2]$    & $A[1;0]$ $B[-1;-2]$   & $A[-1;2]$ $\vec{v}(1,-1)$ & $A[2;2]$ $\vec{v}(-1,2)$  \\
+      $A[-2;1]$ $B[2;-1]$   & $A[1;1]$ $B[2;2]$     & $A[-2;2]$ $\vec{v}(2,-1)$ & $A[2;3]$ $\vec{v}(-1,-1)$ \\
+      $A[-2;3]$ $B[4;-5]$   & $A[0;0]$ $B[3;-2]$    & $A[0;2]$ $\vec{v}(0,-1)$  & $A[3;2]$ $\vec{v}(-2,3)$  \\
     \end{tabular}
     \reseni{Ř1}
   \end{frame}
@@ -223,7 +274,7 @@
       Střed úsečky $AB$ daná body $A[x_{a},y_{a}]$ a $B[x_{b},y_{b}]$ rozumíme bod
       $S$, pro který platí $|AS|=|SB|$. Souřadnice středu se vypočítají následovně:
       \[
-        S[\dfrac{x_a+x_b}{2};\dfrac{y_a+y_b}{2}]
+        S\left[\dfrac{x_a+x_b}{2};\dfrac{y_a+y_b}{2}\right]
       \]
     \end{alertblock}
     \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
@@ -241,16 +292,16 @@
   \end{frame}
 
   \begin{frame}{Velikost úsečky/vektoru}
-    \begin{alertblock}{Střed úsečky}
+    \begin{alertblock}{Velikost úsečky/vektoru}
       Velikost úsečky $AB$ daná body $A[x_{a},y_{a}]$ a $B[x_{b},y_{b}]$ rozumíme
       velikost vektoru $\vec{u}=B-A$. Lze vypočítat následovně:
       \[
-        |AB|=\vec{u}=\sqrt{(x_{b}-x_{a})^{2}+(y_{b}+y_{a})^{2}}=\sqrt{u_{x}^{2}+u_{y}^{2}}
+        |AB|=\vec{u}(x_{\vec{u}};y_{\vec{u}})=\sqrt{(x_{b}-x_{a})^{2}+(y_{b}+y_{a})^{2}}=\sqrt{x_{\vec{u}}^{2}-y_{\vec{u}}^{2}}
       \]
     \end{alertblock}
     \begin{tikzpicture}[scale=0.7, line cap=round, line join=round]
       \draw[gray] (-1,0) grid (6,4);
-      \draw (2,1) -- (5,1) -- (5,3);
+      \draw (2,1) -- (5,1) node[pos=0.5, below]{$u_x$} -- (5,3) node[pos=0.5, anchor=west]{$u_y$};
       \draw[-latex, thick] (-1.4,0) -- (6.4,0) node[anchor=south east] {$x$};
       \draw[-latex, thick] (0,-0.4) -- (0,4.4) node[anchor=north west] {$y$};
       \filldraw (2,1) circle (2pt) node[anchor=north east] {$A$};
@@ -265,12 +316,36 @@
     \begin{tabular}{C{3cm} C{3cm} | C{3cm} C{3cm}}
       \multicolumn{2}{c|}{Určete středy úseček $AB$ a její velikost} & \multicolumn{2}{c}{Určete velikost vektorů:} \\
       \hline
-      $A[2;2]$ $B[-1;2]$                                             & $A[1;1]$ $B[-1;-2]$                         & $\vec{v}(1,1)$  & $\vec{v}(-1,1)$  \\
-      $A[0;2]$ $B[0;-2]$                                             & $A[1;0]$ $B[-1;-2]$                         & $\vec{v}(3,-4)$ & $\vec{v}(4,3)$   \\
-      $A[-2;1]$ $B[2;-1]$                                            & $A[1;1]$ $B[2;2]$                           & $\vec{v}(2,-1)$ & $\vec{v}(-1,-1)$ \\
-      $A[-2;3]$ $B[4;-5]$                                            & $A[0;0]$ $B[3;-2]$                          & $\vec{v}(0,-1)$ & $\vec{v}(-2,3)$  \\
+      $A[2;2]$ $B[-1;2]$          & $A[1;1]$ $B[-1;-2]$         & $\vec{v}(1,1)$  			 & $\vec{v}(-1,1)$  \\
+      $A[0;2]$ $B[0;-2]$          & $A[1;0]$ $B[-1;-2]$         & $\vec{v}(3,-4)$			 & $\vec{v}(4,3)$   \\
+      $A[-2;1]$ $B[2;-1]$         & $A[1;1]$ $B[2;2]$           & $\vec{v}(2,-1)$			 & $\vec{v}(-1,-1)$ \\
+      $A[-2;3]$ $B[4;-5]$         & $A[0;0]$ $B[3;-2]$          & $\vec{v}(0,-1)$			 & $\vec{v}(-2,3)$  \\
     \end{tabular}
     \reseni{Ř2}
+  \end{frame}
+  
+  \begin{frame}{Obsahy v ANAGEO}
+ 	Mají docela dobrou výhodu - jsou tu míry a čtverečky. Pokud není řečeno (zapomenu zadat), vždy počítáme v jednotkách (značíme $j$).\\[2ex]
+  	\begin{tikzpicture}[>=stealth, scale=0.6, font=\footnotesize]
+	 \filldraw[red!50] (-2,-3) -- (3,-3)--(3,1) -- (0,1) -- (0,3) -- (-2,3) -- cycle;
+     \draw[->] (-4.2,0) -- (4.2,0) node[anchor=south west] {$x$};
+     \draw[->] (0,-4.2) -- (0,4.2) node[right] {$y$};
+     \draw[step=1,gray!30] (-4,-4) grid (4,4);
+     \foreach \x in {-4,-3,-2,-1,0,1,2,3,4}:
+         \draw (\x,0.1) -- (\x,-0.1) node[below] {\x};
+     \foreach \y in {-4,-3,-2,-1,1,2,3,4}:
+         \draw (0.1,\y) -- (-0.1,\y) node[left] {\y};
+ 	 \end{tikzpicture} \vspace{2cm}
+ 	\begin{tikzpicture}[>=stealth, scale=0.6, font=\footnotesize]
+ 	 \filldraw[red!50] (-2,-3) -- (3,-1) -- (3,1) -- (0,2) -- (-2,3) -- (-2,3) -- cycle;
+     \draw[->] (-4.2,0) -- (4.2,0) node[anchor=south west] {$x$};
+     \draw[->] (0,-4.2) -- (0,4.2) node[right] {$y$};
+     \draw[step=1,gray!30] (-4,-4) grid (4,4);
+     \foreach \x in {-4,-3,-2,-1,0,1,2,3,4}:
+         \draw (\x,0.1) -- (\x,-0.1) node[below] {\x};
+     \foreach \y in {-4,-3,-2,-1,1,2,3,4}:
+         \draw (0.1,\y) -- (-0.1,\y) node[left] {\y};
+	  \end{tikzpicture}
   \end{frame}
 
   \section{Parametrické vyjádření přímky}
@@ -284,7 +359,7 @@
 	      [autoplay,loop]{10} 
 		  	\multiframe{180}{i=-120+1}{ 
 				\begin{tikzpicture}[
-					scale=0.7,
+					scale=0.6,
 					line cap=round,
 					line join=round,
 					grid/.style={gray!35, thin},
@@ -297,16 +372,16 @@
 					axis label/.style={anchor=north east},
 					info label/.style={anchor=west}
 				]
-					\def\xmin{-5}
-					\def\xmax{5}
-					\def\ymin{-5}
-					\def\ymax{5}
+					\def\xmin{-5.2}
+					\def\xmax{5.2}
+					\def\ymin{-5.2}
+					\def\ymax{5.2}
 					
 					\coordinate (A) at (-2,-2);
 					\coordinate (V) at (2,1);
 					\pgfmathsetmacro{\t}{-0.025*\i}
 					
-					\draw[grid] (\xmin,\ymin) grid (\xmax,\ymax);
+					\draw[grid] (-5,-5) grid (5,5);
 					\draw[axis] (\xmin-0.2,0) -- (\xmax+0.2,0) node[axis label] {$x$};
 					\draw[axis] (0,\ymin-0.2) -- (0,\ymax+0.2) node[axis label] {$y$};
 					
@@ -337,13 +412,44 @@
 	      \]
 	      Někdy se uvádí dvě rovnice pro výpočet příslušných souřadnic bodu $P[x,y]$:
 	      \[
-	        x=a_{x}+t\cdot v_{x}
+	        x=a_{x}+t\cdot v_{x} \ \ \ \ \ \ \ \ \ \
 	      \]
 	      \[
 	        y=a_{y}+t\cdot v_{y} \ \ \ \ t\in \mathbb{R}
 	      \]
 	    \end{alertblock}
 	  \end{frame}
+
+	  \begin{frame}[label=C3]{Cvičení - Parametrický tvar přímky}
+    	\begin{tabular}{L{3cm} L{3cm} | L{3cm} L{3cm}}
+     	 \multicolumn{2}{C{6cm}|}{Určete parametrické vyjádření přímek dané bodem $A$ a vektorem $\vec{v}$:} & \multicolumn{2}{C{6cm}}{Určete parametrické vyjádření přímek dané body $A,B$:} \\
+      	 \hline
+     	 $A[2;2]$ $\vec{v}(1,1)$     & $A[1;1]$ $\vec{v}(-1,1)$         & $A[-1;2]$  $B[0;-2]$		 & $A[0;2]$  $B[0;-2]$  \\
+      	 $A[0;2]$ $\vec{v}(3,-4)$	 & $A[1;0]$ $\vec{v}(4,3)$          & $A[2;-1]$  $B[4;-5]$		 & $A[-1;0]$  $B[3;-2]$  \\
+      	 $A[-2;1]$ $\vec{v}(2,-1)$   & $A[1;1]$ $\vec{v}(-1,-1)$        & $A[-1;-2]$ $B[1;2]$		 & $A[1;2]$  $B[2;3]$ \\
+      	 $A[-2;3]$ $\vec{v}(0,-1)$	 & $A[0;0]$ $\vec{v}(-2,3)$         & $A[2;2]$   $B[2;-2]$ 		 & $A[3;5]$  $B[-3;-5]$  \\
+   	   \end{tabular}
+   		 \reseni{Ř3}
+  	  \end{frame}
+  
+	  \begin{frame}[label=C4]{Cvičení - Parametrický tvar přímky v $0xy$}
+	  Narýsujte dané přímky do $Oxy$: \\[2ex]
+ 		\begin{tabular}{lll}
+ 			$x=1+2t$ 	& $x=-1+t$ & $x=2+\dfrac{1}{2}t$ 	\\
+ 			$y=t$ 		& $y=3-2t$ & $y=-1-t$ 				\\[2ex]
+ 		    $x=-2-t$ 	& $x=1+2t$ & $x=-1+\dfrac{1}{2}t$ 	\\
+		    $y=1+t$ 	& $y=-3-t$ & $y=2-t$ 				\\[2ex]
+		\end{tabular}
+		\reseni{Ř5}
+	  \end{frame}
+	 
+	  \begin{frame}[label=C5]{Cvičení - Parametrický tvar přímky v $0xy$}
+  		Určete parametrické vyjádření z přímky: \\[2ex]
+  		\begin{tabular}{ll}
+ 			\vgraf{x+1,x/2-1,2*x-2} & \vgraf{2*x/3+2,x/3-2,x} \\
+ 		\end{tabular}
+ 		\reseni{Ř5}
+ 	  \end{frame}
 
   \section{Obecná rovnice přímky}
 	  \begin{frame}
@@ -359,11 +465,11 @@
 	    \zpet{C2}
 	  \end{frame}
 	
-	  \begin{frame}[label=Ř3]{Řešení cvičení - převod na goniometrický tvar}
+	  \begin{frame}[label=Ř3]{Řešení cvičení - Parametrický tvar přímky}
 	    \zpet{C3}
 	  \end{frame}
 	
-	  \begin{frame}[label=Ř4]{Řešení cvičení - převod na algebraický tvar}
+	  \begin{frame}[label=Ř4]{Řešení cvičení - Parametrický tvar přímky v $0xy$}
 	    \zpet{C4}
 	  \end{frame}
 	  \begin{frame}[label=Ř5]{Řešení cvičení - násobení v GONIO a Moivreova věta}
