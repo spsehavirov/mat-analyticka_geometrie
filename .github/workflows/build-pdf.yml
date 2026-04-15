@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install TeX Live
         run: |
@@ -37,7 +37,7 @@ jobs:
             "Analytická geometrie, Prezentace, Krajíček.tex"
 
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: analyticka-geometrie-pdf
           path: analyticka-geometrie.pdf
