@@ -452,9 +452,28 @@
  	  \end{frame}
 
   \section{Obecná rovnice přímky}
-	  \begin{frame}
-	    Tady rovnice
+	  \begin{frame}{Motivace}
+	    Někdy je nepohodlné psát dvě rovnice pro jednu přímku (případně rovnice, kde jsou matice...). Proto můžeme zavést jednoduší tvar pomocí toho, že se zbavíme parametru: 
+	    $$x=2-t$$ $$\underline{y=1+2t}$$ $$2x+y=5$$
+	    Tím jsme se sice zbavili problému rovnic, nicméně ztrácíme možnost "intuitivních" informací - nevíme směrový vektor a bod, který by na přímce ležel.
 	  \end{frame}
+	  
+	 \begin{frame}{Obecná rovnice přímky}
+	 	\begin{alertblock}{Obecná rovnice přímky}
+	 			Obecnou rovnicí přímky rozumíme \textbf{jednu} rovnici ve tvaru: $$ax+by+c=0$$ Body $[x,y]$, které splňují rovnost, pak leží na přímce dané touto rovnicí.
+	 	\end{alertblock}
+	 	Tato rovnice má několik výhod - jednak je pouze jedna a také se v ní snadno ověřují body. \\
+	 	Příklad: Ověřte, že bod $A[2,-1]$ leží na přímce $p: x-2y+1=0$ \\[2ex]
+	 	Dosadíme bod do rovnice a ověříme: $2-2\cdot (-1)+1 = 0$ Vyšla nepravda - Bod na přímce neleží
+	 \end{frame}
+	 
+	 \begin{frame}{Normálový vektor}
+	 	Nicméně ztrácíme o přímce několik intuitivních informací - její směr a bod, který na ní leží. Ovšem máme alespoň něco...
+	 	\begin{alertblock}{Normálový vektor}
+	 	Normálový vektor přímky je takový vektor, který je na přímku \textbf{kolmý}. Platí, že pro přímku $p: ax+by+c=0$ je normálový vektor $$\vec{n_p}(a,b)$$
+	 	\end{alertblock}
+	 	A co $c$? To nám o přímce moc neřekne... Ve stručnosti jak moc je přímky vzdálená od počátku. Neplatí však, že, když $c=5$ pak vzdálenost přímky od počátku je $5$ (nicméně v některých speciálních případech může)
+	 \end{frame}
 
   \section{Řešení}
 	  \begin{frame}[label=Ř1]{Řešení cvičení - Posun a tvorba vektorů}
