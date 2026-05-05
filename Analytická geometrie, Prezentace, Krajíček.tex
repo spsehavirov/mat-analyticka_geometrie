@@ -472,9 +472,100 @@
 	 	\begin{alertblock}{Normálový vektor}
 	 	Normálový vektor přímky je takový vektor, který je na přímku \textbf{kolmý}. Platí, že pro přímku $p: ax+by+c=0$ je normálový vektor $$\vec{n_p}(a,b)$$
 	 	\end{alertblock}
-	 	A co $c$? To nám o přímce moc neřekne... Ve stručnosti jak moc je přímky vzdálená od počátku. Neplatí však, že, když $c=5$ pak vzdálenost přímky od počátku je $5$ (nicméně v některých speciálních případech může)
+	 	A co $c$? To nám o přímce moc neřekne... Ve stručnosti - jak moc je přímky vzdálená od počátku. Neplatí však, že, když $c=5$ pak vzdálenost přímky od počátku je $5$ (nicméně v některých speciálních případech může)
 	 \end{frame}
+	 
+	 \begin{frame}{Jak získat obecný tvar přímky?}
+	  \begin{center} Potřebujeme něco ve tvaru $ax+by+c=0$ \end{center} 
+	 	\begin{enumerate}[i) ]
+	 	 \item Nejprve zjistím $a$ a $b$ pomocí \textit{normálového vektoru}
+	 	 \item Dosadím za $x$ a $y$ souřadnice bodu, který na té přímce leží
+	 	 \item Mám rovnici o jedné neznáme $c$ - zjistím $c$
+	 	 \item Zapíšu místo čísel $a,b,c$ zjištěná čísla. 
+	 	\end{enumerate}
+	  Proces je sice trochu komplikovanější, ale za to je to jenom jedna rovnice, která má několik výhod... \\[2ex]
+	  Například ověřování toho, zdali bod leží na přímce.
+	 \end{frame}
+	 
+	 	  \begin{frame}[label=C6]{Cvičení - Obecné vyjádření přímky}
+    	\begin{tabular}{L{3cm} L{3cm} | L{3cm} L{3cm}}
+     	 \multicolumn{2}{C{6cm}|}{Určete obecnou rovnici přímky dané bodem $A$ a vektorem $\vec{v}$:} & \multicolumn{2}{C{6cm}}{Určete obecnou rovnici přímek dané body $A,B$:} \\
+      	 \hline
+     	 $A[2;2]$ $\vec{v}(1,1)$     & $A[1;1]$ $\vec{v}(-1,1)$         & $A[-1;2]$  $B[0;-2]$		 & $A[0;2]$  $B[0;-2]$  \\
+      	 $A[0;2]$ $\vec{v}(3,-4)$	 & $A[1;0]$ $\vec{v}(4,3)$          & $A[2;-1]$  $B[4;-5]$		 & $A[-1;0]$  $B[3;-2]$  \\[2ex]
+      	 \multicolumn{4}{C{14cm}}{Ověřte zda body $A,B$ náleží přímkám, které jste vypočetli výše (berete stejné pozice) } \\
+      	 \hline
+      	 $A[-2;-2]$ $B[1;0]$	 	 & $A[2;0]$ $B[0;2]$    			& $A[1;2]$   $B[-2;1]$ 		 & $A[-1;2]$   $B[0;1]$  \\
+      	 $A[3;-2]$ $B[1;\frac{2}{3}]$& $A[0;3]$ $B[-3;-3]$    			& $A[-2;3]$   $B[-2;5]$ 	 & $A[1;-1]$   $B[-1;1]$  \\
+   	   \end{tabular}
+   		 \reseni{Ř6}
+  	  \end{frame}
 
+	\begin{frame}{Výhody obecné rovnice přímky}
+	Obecná rovnice přímky má mnoho výhod:
+	 \begin{itemize}[- ]
+	  \item Je pouze jedna
+	  \item Může se snadno upravovat (použijeme ekvivalentní úpravy)
+	  \item Ověření bodů je hračka
+	  \item Řešení vzájemné polohy je o trošku jednoduší
+	 \end{itemize}
+	Ale proč bychom chtěli tento tvar upravovat? Třeba do tvaru, který dobře známe:
+	$$ax+by+c=0$$ $$\dfrac{a}{b}x+y+\dfrac{c}{b}=0$$ $$y=-\dfrac{a}{b}x-\dfrac{c}{b}$$ 
+	\end{frame}
+	
+	\begin{frame}{Směrnicový tvar přímky}
+	 \begin{alertblock}{Směrnicový tvar přímky}
+	  \begin{minipage}{0.63\textwidth}
+	   Směrnicovým tvarem přímky rozumíme následující tvar přímky: $$y=kx+q$$ kde $k$ je směrnicí přímky a $q$ je $y$-ová souřadnice průsečíku na ose $y$
+	  \end{minipage}  \hspace{0.3cm}
+	  \begin{minipage}{0.3\textwidth}
+	   \begin{tikzpicture}[scale=0.6]
+	    \draw[color=gray] (-1.2,-1.2) grid (5.2,4.2);
+		\draw[->,thick] (-1.4,0)--(5.4,0) node[above]{$x$};
+		\draw[->,thick] (0,-1.4)--(0,4.4) node[right]{$y$};
+		\draw[BrickRed,thick] (1,1)-- node[pos=0.5,below]{$\Delta x$} (4,1);
+		\draw[NavyBlue, thick] (4,1)-- node[pos=0.5,right]{$\Delta y$} (4,3);
+		\draw[thick](-2,-1)--(5.5,4) node[below]{$p$};
+		\draw[purple, ->] (1,1.2)-- node[pos=0.5, sloped, above]{$\vec{s_p}$}(4,3.2);
+	   \end{tikzpicture}
+	  \end{minipage}
+	 \end{alertblock}
+	 Jestliže přímka $p$ má směrový vektor $\vec{s_p}(s_x,s_y)$ pak platí: $$k=\dfrac{\textcolor{NavyBlue}{\Delta y}}{\textcolor{BrickRed}{\Delta x}} = \dfrac{s_y}{s_x}$$
+	\end{frame}
+	
+	\begin{frame}{Cvičení - úprava přímek}
+	
+	\end{frame}
+	
+	\begin{frame}{Úsekový tvar přímky}
+	 Ve speciálních případech se může hodit následující tvar přímky:
+	  \begin{alertblock}{Úsekový tvar přímky}
+	   \begin{minipage}{0.6\textwidth}
+	   Úsekovým tvarem přímky rozumíme následující tvar: $$\dfrac{x}{x_P}+\dfrac{y}{y_P}=1$$ kde $x_P$ a $y_P$ jsou příslušné souřadnice průsečíků na osách $x$ a $y$.
+	   \end{minipage}  \hspace{0.3cm}
+	   \begin{minipage}{0.3\textwidth}
+	    \begin{tikzpicture}[scale=0.5]
+	     \draw[color=gray] (-1.2,-1.2) grid (5.2,4.2);
+		 \draw[->,thick] (-1.4,0)--(5.4,0) node[above]{$x$};
+		 \draw[->,thick] (0,-1.4)--(0,4.4) node[right]{$y$};
+		 \draw[BrickRed,thick] (0,0.05)-- node[pos=0.5,below]{$x_P$} (3.95,0.05);
+		 \draw[NavyBlue, thick] (0.05,0.05)-- node[pos=0.5,right]{$y_P$} (0.05,2.95);
+		 \draw[thick](-1.5,4.1)--(5.5,-1.1) node[left]{$p$};
+	    \end{tikzpicture}
+	   \end{minipage}
+	  \end{alertblock}
+	\end{frame}
+	
+	\begin{frame}{Cvičení - tvary}
+	Zapište všechny tvary (parametrický, obecný, směrnicový, úsekový) následujících přímek: \\ \begin{center}
+	 \vgraf{2*x-1, x/2+2, -x-2} \hspace{1cm} \vgraf{2+0*x, 3*x-4, -x/3+1}	\end{center}
+	\end{frame}
+	
+	\begin{frame}{A k čemu nám to je?}
+	 Ke spoustě věcem
+	\end{frame}
+	
+	
   \section{Řešení}
 	  \begin{frame}[label=Ř1]{Řešení cvičení - Posun a tvorba vektorů}
 	    \zpet{C1}
@@ -495,7 +586,7 @@
 	    \zpet{C5}
 	  \end{frame}
 	
-	  \begin{frame}[label=Ř6]{Řešení cvičení - lineární rovnice v \C}
+	  \begin{frame}[label=Ř6]{Řešení cvičení - Obecné vyjádření přímky}
 	    \zpet{C6}
 	  \end{frame}
   \end{document}
