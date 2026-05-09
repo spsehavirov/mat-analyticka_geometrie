@@ -72,7 +72,7 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \pgfplotsset{height=200pt} %velikost
-\usetikzlibrary{calc}
+\usetikzlibrary{calc,quotes, angles}
 
 % Lepší tabulky.
 \usepackage{multirow}
@@ -113,6 +113,8 @@
 \setbeamercolor{button}{bg=BrickRed}
 \setbeamercolor{block title alerted}{fg=BrickRed, bg=BrickRed!20}
 \setbeamercolor{block body alerted}{fg=black, bg=BrickRed!10}
+\setbeamercolor{block title example}{fg=ForestGreen, bg=ForestGreen!20}
+\setbeamercolor{block body example}{fg=black, bg=ForestGreen!10}
 \setbeamertemplate{blocks}[rounded][shadow=true]
 
 % ===   ÚVODNÍ SLIDE   ===
@@ -207,7 +209,7 @@
        \filldraw (4,3) circle (2pt) node[anchor=south west] {$B$};
        \draw[-latex, thick, red]
         (1,1) -- (4,3)
-        node[pos=0.5, above, sloped,red] {$\overrightarrow{AB}(2,1)$};
+        node[pos=0.5, above, sloped,red] {$\overrightarrow{AB}(3,2)$};
        \draw[blue]
         (1,1) -- (4,1) node[pos=0.5, below, black]{\tiny $B_x - A_x = 3$};
        \draw[blue]
@@ -451,7 +453,7 @@
  		\reseni{Ř5}
  	  \end{frame}
 
-  \section{Obecná rovnice přímky}
+  \section{Obecná rovnice přímky aj.}
 	  \begin{frame}{Motivace}
 	    Někdy je nepohodlné psát dvě rovnice pro jednu přímku (případně rovnice, kde jsou matice...). Proto můžeme zavést jednoduší tvar pomocí toho, že se zbavíme parametru: 
 	    $$x=2-t$$ $$\underline{y=1+2t}$$ $$2x+y=5$$
@@ -533,8 +535,14 @@
 	 Jestliže přímka $p$ má směrový vektor $\vec{s_p}(s_x,s_y)$ pak platí: $$k=\dfrac{\textcolor{NavyBlue}{\Delta y}}{\textcolor{BrickRed}{\Delta x}} = \dfrac{s_y}{s_x}$$
 	\end{frame}
 	
-	\begin{frame}{Cvičení - úprava přímek}
-	
+	\begin{frame}[label=C7]{Cvičení - úprava přímek}
+	  \begin{tabular}{L{3cm} L{3cm} | L{3cm} L{3cm}}
+     	 \multicolumn{4}{C{12cm}}{Přepište obecné rovnice přímek na směrnicový tvar a určete směrnici:} \\
+      	 \hline
+     	 $x-y=0$     & $x+y-2=0$         & $4x+y+2=0$		 & $x=0$  \\
+      	 $4x+3y-6=0$	 & $3x-4y-6=0$          & $2x+y+3=0$		 & $x+2y+1=0$  \\[2ex]
+      \end{tabular}
+      \reseni{Ř7}
 	\end{frame}
 	
 	\begin{frame}{Úsekový tvar přímky}
@@ -561,10 +569,85 @@
 	 \vgraf{2*x-1, x/2+2, -x-2} \hspace{1cm} \vgraf{2+0*x, 3*x-4, -x/3+1}	\end{center}
 	\end{frame}
 	
-	\begin{frame}{A k čemu nám to je?}
-	 Ke spoustě věcem
+	\begin{frame}{Vzájemná poloha přímek}
+	 Jak jsme se bavili, vzájemná poloha přímek v rovinně může být následující:
+	  \begin{itemize}[- ]
+	   \item nemají společný bod a mají stejný směr - \textit{rovnoběžné}
+	   \item mají právě jeden společný bod - \textit{různoběžné}
+	   \item mají nekonečně společných bodů - \textit{totožné}
+	  \end{itemize}
+	 Jak ale zjistíme vzájemnou polohu? Lze na to jít dvěma způsoby:
+	 \begin{tabular}{C{8cm} C{6cm}} \hline
+	 Přes \textit{společné body} & Přes \textit{odchylku} \\
+	 Zjistím, kolik mají přímky společných bodů a podle toho usoudím jejich vztah & Zjistím odchylku přímek - pokud je $0^\circ$, pak musím dále rozhodnout \\
+	 \textbf{Soustava rovnic} & \textbf{Přes vzorec} \\
+	 \end{tabular}
+	\end{frame}
+
+\section{Metrika}
+	
+	\begin{frame}{Odchylka dvou přímek - Odchylka dvou vektorů}
+	 \begin{alertblock}{Odchylka dvou vektorů}
+	 Odchylka dvou vektorů $\vec{u}$ a $\vec{v}$ se spočítá přes následující vztah: $$\cos \varphi = \dfrac{|\vec{u}\cdot \vec{v}|}{|\vec{u}||\vec{v}|}$$
+	 \end{alertblock}
+	 \textit{Pozn.:} Je to absolutní hodnota \textbf{skalárního součin} vydělen součinem \textbf{velikostí} jednotlivých vektorů\\
+	 \textit{Pozn. 2:} Je třeba dát pozor, aby odchylka $\varphi$ byla od $0^\circ$ do $90^\circ$ včetně.\\ \vspace{0.2cm} \hspace{1cm}
+	 \begin{tikzpicture}[scale=0.6]
+	 	\coordinate (A) at (0,0);
+	 	\coordinate (B) at (1,2);
+	 	\coordinate (P) at (3.3,1.1);
+	 	\draw (A) -- (6,2);
+	 	\draw (B) -- (7.5,-0.5);
+	 	\filldraw (P) circle (0.2pt)  node[above]{$P$};
+        \pic ["$\varphi$", draw, thick, angle eccentricity=1.5] {angle = B--P--A};
+	 \end{tikzpicture} \hspace{2cm}
+	 \begin{tikzpicture}[scale=0.6]
+	 	\coordinate (A) at (1,2);
+	 	\coordinate (B) at (6,2);
+	 	\coordinate (P) at (3.3,1.1);
+	 	\draw (0,0) -- (B);
+	 	\draw (A) -- (7.5,-0.5);
+	 	\filldraw (P) circle (0.2pt)  node[below]{$P$};
+        \pic ["Není odchylka", draw, thick, angle eccentricity=1.5] {angle = B--P--A};
+	 \end{tikzpicture}
 	\end{frame}
 	
+	\begin{frame}{Vzdálenost bodu od přímky}
+	\textit{Pozorování:} Co se stane, když nám vyjde, že bod neleží na přímce? Co to číslo znamená? \\
+	 \begin{tikzpicture}[scale=0.6]
+	     \draw[color=gray] (-1.2,-1.2) grid (5.2,5.2);
+		 \draw[->,thick] (-1.4,0)--(5.4,0) node[above]{$x$};
+		 \draw[->,thick] (0,-1.4)--(0,5.4) node[right]{$y$};
+		 \draw[thick](-0.5,-1.5)--node[sloped, below ,pos=0.7]{$p:x-y+1=0$}(5.5,4.5);
+		 \foreach \x in {1,...,4}
+		 	\filldraw[BrickRed] (\x,\x+1) circle (2pt);
+	  \end{tikzpicture} \hspace{2cm}
+     \begin{tikzpicture}[scale=0.6]
+	     \draw[color=gray] (-1.2,-1.2) grid (5.2,5.2);
+		 \draw[->,thick] (-1.4,0)--(5.4,0) node[above]{$x$};
+		 \draw[->,thick] (0,-1.4)--(0,5.4) node[right]{$y$};
+		 \draw[thick](-0.5,-1.5)--(5.5,4.5)node[anchor=north]{$p$};
+		 	\filldraw[BrickRed] (1,4) circle (2pt);
+		 	\filldraw[BrickRed] (5,0) circle (2pt);
+		 	\filldraw[NavyBlue] (2,2) circle (2pt);
+		 	\filldraw[NavyBlue] (3,1) circle (2pt);
+	  \end{tikzpicture}
+	\end{frame}
+	
+	\begin{frame}{Vzdálenost bodu od přímky}
+	 \begin{alertblock}{Vzdálenost bodu od přímky}
+	 Vzdálenost bodu $\textcolor{BrickRed}{X[x_x,x_y]}$ od přímky $\textcolor{NavyBlue}{p: ax+by+c}$ lze vypočítat následujícím způsobem: $$|Xp|=\dfrac{|\textcolor{NavyBlue}{a}\textcolor{BrickRed}{x_x}+\textcolor{NavyBlue}{b}\textcolor{BrickRed}{x_y}+\textcolor{NavyBlue}{c}|}{\sqrt{\textcolor{NavyBlue}{a}^2+\textcolor{NavyBlue}{b}^2}}$$
+	 \end{alertblock}
+	 Jedná se o vzorec, který lze těžko dovodit (jde to, ale zabralo by to tady 5 slidů). Kdo by chtěl může jej odvodit jako dobrovolný domácí úkol. 
+	 \begin{exampleblock}{Normovaný vektor}
+	  Normovaným vektorem, rozumíme vektor, který byl zkrácen (popřípadě prodloužen) tak, aby měl velikost 1.
+	 \hspace{4cm}\ $\vec{u_n}=\dfrac{\vec{u}}{|\vec{u}|}$
+	 \end{exampleblock}
+	\end{frame}
+	
+	\begin{frame}[label=C8]{Cvičení - Vzájemná poloha, odchylka a vzdálenost od přímky}
+	
+	\end{frame}
 	
   \section{Řešení}
 	  \begin{frame}[label=Ř1]{Řešení cvičení - Posun a tvorba vektorů}
@@ -582,11 +665,30 @@
 	  \begin{frame}[label=Ř4]{Řešení cvičení - Parametrický tvar přímky v $0xy$}
 	    \zpet{C4}
 	  \end{frame}
+	  
 	  \begin{frame}[label=Ř5]{Řešení cvičení - násobení v GONIO a Moivreova věta}
 	    \zpet{C5}
 	  \end{frame}
 	
 	  \begin{frame}[label=Ř6]{Řešení cvičení - Obecné vyjádření přímky}
-	    \zpet{C6}
+	        	\begin{tabular}{L{3cm} L{3cm} | L{3cm} L{3cm}}
+     	 \multicolumn{2}{C{6cm}|}{Určete obecnou rovnici přímky dané bodem $A$ a vektorem $\vec{v}$:} & \multicolumn{2}{C{6cm}}{Určete obecnou rovnici přímek dané body $A,B$:} \\
+      	 \hline
+     	 $x-y=0$     & $x+y-2=0$         & $4x+y+2=0$		 & $x=0$  \\
+      	 $4x+3y-6=0$	 & $3x-4y-6=0$          & $2x+y+3=0$		 & $x+2y+1=0$  \\[2ex]
+      	 \multicolumn{4}{C{14cm}}{Ověřte zda body $A,B$ náleží přímkám, které jste vypočetli výše (berete stejné pozice) } \\
+      	 \hline
+      	 $A$ - Ano $B$ - Ne	 	 & $A$ - Ano $B$ - Ne    			& $A$ - Ne   $B$ - Ne 		 & $A$ - Ne   $B$ - Ano  \\
+      	 $A$ - Ano $B$ - Ne 	 & $A$ - Ne $B$ - Ano    			& $A$ - Ne   $B$ - Ne 	 & $A$ - Ano   $B$ - Ne  \\
+   	   \end{tabular}\zpet{C6}
 	  \end{frame}
+	  
+	  \begin{frame}[label=Ř7]{Řešení cvičení - Úprava přímek}
+	    \zpet{C7}
+	  \end{frame}
+
+	  \begin{frame}[label=Ř8]{Řešení cvičení - Vzájemná poloha, odchylka a vzdálenost od přímky}
+	    \zpet{C8}
+	  \end{frame}
+	  
   \end{document}
